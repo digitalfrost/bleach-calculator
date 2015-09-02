@@ -2,6 +2,21 @@
 
 A simple utility to work out how to make a bleach solution of a given volume and concentration.
 
+## DISCLAIMER
+
+The calculator is provided/being made available  without any warranties, express or implied, including fitness for a particular purpose. We shall not be liable or responsible to any person for any harm, loss or damage that may arise in any connection with the use of the dilution calculator, including without limitation any direct, indirect, special, third party, or consequential damages.
+
+## WARNING
+
+It is estimated that there are about 3300 accidents needing hospital treatment caused by sodium hypochlorite solutions each year in British homes
+
+Mixing bleach with some household cleaners can be hazardous.  Mixtures of other cleaning agents and or organic matter can result in a gaseous reaction that can cause acute lung injury.
+
+
+Always wear appropriate safety equipment when handling bleach
+
+### Description​​
+
 Works out either:
 
   - original volume
@@ -11,7 +26,7 @@ Works out either:
 
 given the other three characteristics of the bleach solution.
 
-Original concentration is in &degree Chloro
+Original concentration is in ???&degree Chloro???
 Final concentration is in mg/litres
 
 ### Install
