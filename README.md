@@ -11,6 +11,9 @@ Works out either:
 
 given the other three characteristics of the bleach solution.
 
+Original concentration is in &degree Chloro
+Final concentration is in mg/litres
+
 ### Install
 
 Install via npm
