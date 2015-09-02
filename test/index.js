@@ -3,13 +3,13 @@ var BleachSolution = require('../index.js');
 
 
 //var s = new BleachSolution({originalConcentration : 20, finalVolume: 10, finalConcentration: 10});
-var s = new BleachSolution({originalConcentration : 36, finalVolume: 10, finalConcentration: 1000});
+var s = new BleachSolution({originalVolume: 0.087 , finalVolume: 10, finalConcentration: 1});
 
-console.log ("Test4:" + s.originalVolume);
+console.log ("Test4 OC1:" + s.originalConcentration);
 
 describe('Calculate Bleach Solution', function() {
   it('should calculate original volume', function() {
-    s = new BleachSolution({originalConcentration : 36, finalVolume: 10, finalConcentration: 1000});
+    s = new BleachSolution({originalConcentration : 114.94, finalVolume: 10, finalConcentration: 1000});
     s.originalVolume.should.equal(0.087);
   });
 

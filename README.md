@@ -26,8 +26,8 @@ Works out either:
 
 given the other three characteristics of the bleach solution.
 
-Original concentration is in ???&degree Chloro???
-Final concentration is in mg/litres
+Original concentration is in ???  --> Grams of chloride per litres
+Final concentration is in g / litres
 
 ### Install
 
