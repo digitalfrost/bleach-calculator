@@ -7,6 +7,17 @@ var s = new BleachSolution({originalVolume: 0.087 , finalVolume: 10, finalConcen
 
 console.log ("Test4 OC1:" + s.originalConcentration);
 
+describe('active chlorine calculation', function(){
+  it('should calculate active chlorine for an original solution at 9.6% made from Sodium Hydrochloride with 13% acive chlorine', function(){
+      solution = new BleachSolution({originalConcentration: 9.6})
+      solution.activeChlorine().should.equal(110.59)
+  });
+    it('should calculate active chlorine for an original solution at 5.5% made from Sodium Hydrochloride with 13% acive chlorine', function(){
+      solution = new BleachSolution({originalConcentration: 5.50})
+      solution.activeChlorine().should.equal(59.49)
+  });
+});
+
 describe('Calculate Bleach Solution', function() {
   it('should calculate original volume', function() {
     s = new BleachSolution({originalConcentration : 114.94, finalVolume: 10, finalConcentration: 1000});
