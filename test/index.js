@@ -3,9 +3,10 @@ var BleachSolution = require('../index.js');
 
 
 //var s = new BleachSolution({originalConcentration : 20, finalVolume: 10, finalConcentration: 10});
-var s = new BleachSolution({originalVolume: 0.087 , finalVolume: 10, finalConcentration: 1});
+var s = new BleachSolution({originalConcentration: 0.087 , finalVolume: 10, finalConcentration: 1});
 
 console.log ("Test4 OC1:" + s.originalConcentration);
+console.log("Test rounding: " + s.density2);
 
 describe('active chlorine calculation', function(){
   it('should calculate active chlorine for an original solution at 9.6% made from Sodium Hydrochloride with 13% acive chlorine', function(){
@@ -14,7 +15,7 @@ describe('active chlorine calculation', function(){
   });
     it('should calculate active chlorine for an original solution at 5.5% made from Sodium Hydrochloride with 13% acive chlorine', function(){
       solution = new BleachSolution({originalConcentration: 5.50})
-      solution.activeChlorine().should.equal(59.49)
+      solution.activeChlorine().should.equal(59.51)
   });
 });
 
