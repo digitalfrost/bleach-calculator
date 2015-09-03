@@ -54,23 +54,28 @@ describe('active chlorine calculation', function(){
 
 describe('Calculate Bleach Solution', function() {
   it('should calculate original volume', function() {
-    s = new BleachSolution({originalConcentration : 114.94, finalVolume: 10, finalConcentration: 1000});
+    s = new BleachSolution({originalConcentration : 114.94, finalVolume: 10, finalConcentration: 1});
     s.originalVolume.should.equal(0.087);
   });
 
   it('should calculate original concentration', function() {
-    s = new BleachSolution({originalVolume : 20, finalVolume: 10, finalConcentration: 10});
-    s.originalConcentration.should.equal(5);
+    s = new BleachSolution({originalVolume : 0.02191, finalVolume: 100, finalConcentration: 0.025 });
+    s.originalConcentration.should.equal(114.1);
+  });
+
+  it('should calculate original concentration again', function() {
+    s = new BleachSolution({originalVolume : 0.087, finalVolume: 10, finalConcentration: 1 });
+    s.originalConcentration.should.equal(114.94);
   });
 
   it('should calculate final volume', function() {
-    s = new BleachSolution({originalConcentration : 20, originalVolume: 10, finalConcentration: 10});
-    s.finalVolume.should.equal(5);
+    s = new BleachSolution({originalConcentration : 114.94, originalVolume: 0.04383, finalConcentration: 0.1});
+    s.finalVolume.should.equal(50);
   });
 
   it('should calculate final concentration', function() {
-    s = new BleachSolution({originalConcentration : 20, originalVolume: 10, finalVolume: 10});
-    s.finalConcentration.should.equal(5);
+    s = new BleachSolution({originalConcentration : 114.94, originalVolume: 0.10957, finalVolume: 250});
+    s.finalConcentration.should.equal(0.05);
   });
 
 
