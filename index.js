@@ -135,7 +135,7 @@ var BleachSolution = function (options) {
       }else if (this.manufacturingConcentration == 24) {
         return averageDensityForSolutionsFrom24PercentSodiumHypochlorite[this.originalConcentration.toFixed(1)]
       }else {
-         throw "Data only available for manufacturing densities of 13% or 24%"
+         throw new Error("Data only available for manufacturing densities of 13% or 24%")
       }
     }
 
