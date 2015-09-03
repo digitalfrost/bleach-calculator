@@ -170,8 +170,9 @@ BleachSolution.prototype.calculate = function(toCalc) {
         this.finalVolume = Math.round(this.finalVolume)
         return this.finalVolume
       break
-      case "finalConcentraction":
+      case "finalConcentration":
         this.finalConcentration = (this.originalConcentration * this.originalVolume) / this.finalVolume
+        this.finalConcentration = this.finalConcentration.toFixed(2) * 1
         return this.finalConcentration
       break
       default:

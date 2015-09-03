@@ -1,12 +1,11 @@
 var should = require('chai').should();
 var BleachSolution = require('../index.js');
-var MathJS = require('mathjs');
 
 
-//var s = new BleachSolution({originalConcentration : 20, finalVolume: 10, finalConcentration: 13});
-var s = new BleachSolution({originalConcentration: 0.087 , finalVolume: 10, finalConcentration: 1, manufacturingConcentration: 13});
+var s = new BleachSolution({originalConcentration : 20, originalVolume: 10, finalVolume: 10});
+   // s = new BleachSolution({originalConcentration : 114.94, originalVolume: 0.10957, finalVolume: 250});
 
-console.log ("Test4 OC1:" + s.originalConcentration);
+console.log ("Test5 FC2:" + s.finalConcentration);
 console.log("Test mC: " + s.originalDensity());
 
 
