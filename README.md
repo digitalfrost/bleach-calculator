@@ -1,19 +1,15 @@
 # Bleach Solution Calculator
 
-A simple utility to work out how to make a bleach solution of a given volume and concentration.
+A simple utility to work out how to make a bleach solution of a given volume and concentration and perform various calculations relating to bleach.
 
-## DISCLAIMER
+### Install
 
-The calculator is provided/being made available  without any warranties, express or implied, including fitness for a particular purpose. We shall not be liable or responsible to any person for any harm, loss or damage that may arise in any connection with the use of the dilution calculator, including without limitation any direct, indirect, special, third party, or consequential damages.
+Install via npm
 
-## WARNING
+```
+npm install bleach-calculator
+```
 
-It is estimated that there are about 3300 accidents needing hospital treatment caused by sodium hypochlorite solutions each year in British homes
-
-Mixing bleach with some household cleaners can be hazardous.  Mixtures of other cleaning agents and or organic matter can result in a gaseous reaction that can cause acute lung injury.
-
-
-Always wear appropriate safety equipment when handling bleach
 
 ### Description / Usage
 
@@ -40,15 +36,24 @@ var solution = new BleachSolution({initialPercentageAvailableChlorine : 9.6});
 solution.calculate("sodiumHypoclorite")
 ```
 
-
-### Install
-
-Install via npm
+Calculate initial percentage available chlorine given initial concentration of sodium hypochlorite
 
 ```
-npm install bleach-calculator
+var solution = new BleachSolution({initialPercentageSodiumHypochlorite: 10.08})
+solution.calculate("percentageAvailableChlorine")
 ```
 
 
+## DISCLAIMER
 
-calculate initial percentage Sodium Hypochlorite
+The calculator is provided/being made available  without any warranties, express or implied, including fitness for a particular purpose. We shall not be liable or responsible to any person for any harm, loss or damage that may arise in any connection with the use of the bleach  calculator, including without limitation any direct, indirect, special, third party, or consequential damages.
+
+## WARNING
+
+It is estimated that there are about 3300 accidents needing hospital treatment caused by sodium hypochlorite solutions each year in British homes
+
+Mixing bleach with some household cleaners can be hazardous.  Mixtures of other cleaning agents and or organic matter can result in a gaseous reaction that can cause acute lung injury.
+
+
+Always wear appropriate safety equipment when handling bleach
+
