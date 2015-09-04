@@ -4,9 +4,11 @@ var MathJS = require('mathjs');
 //an optional option specifyinf the sodiun hypochlorite concentration used to make the initial bleach can be passed in.
 var BleachSolution = function (options) {
     this.initialVolume = options.initialVolume ;
-    this.initialConcentration = options.initialConcentration;
+    this.initialAvailableChlorine = options.initialAvailableChlorine // this is the available chlorine normally in mg/l
+    this.initialPercentageAvailableChlorine = options.initialPercentageAvailableChlorine // percentage available chlorine
+    this.initialPercentageAvailableSodiumHypochlorite = options.initialPercentageAvailableChlorine
     this.finalVolume = options.finalVolume;
-    this.finalConcentration = options.finalConcentration;
+    this.finalAvailableChlorine = options.finalAvailableChlorine //normally in mg/l
     this.manufacturingConcentration = options.manufacturingConcentration || 24 ; // default to 24% as per recommendation of C.S.F.E.J.
     //la densité moyenne pour un produit obtenu à partir d’un hypochlorite de sodium à 13 %
     //Average density of the initial solution for a product initialy made from Sodium Hypochlorite at 13 %
@@ -131,9 +133,9 @@ var BleachSolution = function (options) {
 
     this.initialDensity = function(){
       if (this.manufacturingConcentration == 13){
-        return averageDensityForSolutionsFrom13PercentSodiumHypochlorite[this.initialConcentration.toFixed(1)]
+        return averageDensityForSolutionsFrom13PercentSodiumHypochlorite[this.initialPercentageAvailableChlorine.toFixed(1)]
       }else if (this.manufacturingConcentration == 24) {
-        return averageDensityForSolutionsFrom24PercentSodiumHypochlorite[this.initialConcentration.toFixed(1)]
+        return averageDensityForSolutionsFrom24PercentSodiumHypochlorite[this.initialPercentageAvailableChlorine.toFixed(1)]
       }else {
          throw new Error("Data only available for manufacturing densities of 13% or 24%")
       }
@@ -144,7 +146,7 @@ var BleachSolution = function (options) {
 }
 
 BleachSolution.prototype.init = function() {
-  params = ["initialVolume" , "finalVolume", "initialConcentration", "finalConcentration"];
+  params = ["initialVolume" , "finalVolume", "initialAvailableChlorine", "finalAvailableChlorine"];
   params.map(function(param) {
     if (typeof that[param] === 'undefined' ) {
       that.calculate(param)
@@ -156,24 +158,24 @@ BleachSolution.prototype.init = function() {
 BleachSolution.prototype.calculate = function(toCalc) {
   switch(toCalc){
     case "initialVolume":
-        this.initialVolume = (this.finalConcentration * this.finalVolume) / this.initialConcentration
+        this.initialVolume = (this.finalAvailableChlorine * this.finalVolume) / this.initialAvailableChlorine
         this.initialVolume = this.initialVolume.toFixed(3) * 1
         return this.initialVolume
       break
-      case "initialConcentration":
-        this.initialConcentration = (this.finalConcentration * this.finalVolume) / this.initialVolume
-        this.initialConcentration = this.initialConcentration.toFixed(2) * 1
+      case "initialAvailableChlorine":
+        this.initialAvailableChlorine = (this.finalAvailableChlorine * this.finalVolume) / this.initialVolume
+        this.initialAvailableChlorine = this.initialAvailableChlorine.toFixed(2) * 1
         return this.initialConcentration
       break
       case "finalVolume":
-        this.finalVolume = (this.initialConcentration * this.initialVolume) / this.finalConcentration
+        this.finalVolume = (this.initialAvailableChlorine * this.initialVolume) / this.finalAvailableChlorine
         this.finalVolume = Math.round(this.finalVolume)
         return this.finalVolume
       break
-      case "finalConcentration":
-        this.finalConcentration = (this.initialConcentration * this.initialVolume) / this.finalVolume
-        this.finalConcentration = this.finalConcentration.toFixed(2) * 1
-        return this.finalConcentration
+      case "finalAvailableChlorine":
+        this.finalAvailableChlorine = (this.initialAvailableChlorine * this.initialVolume) / this.finalVolume
+        this.finalAvailableChlorine = this.finalAvailableChlorine.toFixed(2) * 1
+        return this.finalAvailableChlorine
       break
       default:
         return "Unknown parameter to calculate"
@@ -188,8 +190,9 @@ BleachSolution.prototype.calculate = function(toCalc) {
 //9,6 x 1,152 x 10 = 110,59 grammes de chlore actif
 //
 BleachSolution.prototype.activeChlorine = function(){
-  activeChlorine = this.initialConcentration * this.initialDensity()  * 10
-  return MathJS.round(activeChlorine, 2)
+  this.activeChlorine = this.initialPercentageAvailableChlorine * this.initialDensity()  * 10
+  this.activeChlorine = this.activeChlorine.toFixed(2) * 1
+  return this.activeChlorine
 }
 
 module.exports = BleachSolution;
