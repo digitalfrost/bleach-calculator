@@ -1,19 +1,19 @@
 var MathJS = require('mathjs');
 
-//expects a hash with 3 of the 4 following keys :originalVolume, :originalConcentration, :finalVolume, :finalConcentration
-//an optional option specifyinf the sodiun hypochlorite concentration used to make the original bleach can be passed in.
+//expects a hash with 3 of the 4 following keys initialVolume, initialConcentration, finalVolume, finalConcentration
+//an optional option specifyinf the sodiun hypochlorite concentration used to make the initial bleach can be passed in.
 var BleachSolution = function (options) {
-    this.originalVolume = options.originalVolume ;
-    this.originalConcentration = options.originalConcentration;
+    this.initialVolume = options.initialVolume ;
+    this.initialConcentration = options.initialConcentration;
     this.finalVolume = options.finalVolume;
     this.finalConcentration = options.finalConcentration;
     this.manufacturingConcentration = options.manufacturingConcentration || 24 ; // default to 24% as per recommendation of C.S.F.E.J.
     //la densité moyenne pour un produit obtenu à partir d’un hypochlorite de sodium à 13 %
-    //Average density of the original solution for a product originaly made from Sodium Hypochlorite at 13 %
+    //Average density of the initial solution for a product initialy made from Sodium Hypochlorite at 13 %
     //This is an average density because in practice it can varry in function of the quality of the Sodium Hypochlorite
-    //the keys corresponds  to percentage original concentration percentageOriginalConcentraction
+    //the keys corresponds  to percentage initial concentration percentageinitialConcentraction
     //data comes from the French "Chambre Syndicale des fabricants d'Eau de Javel"
-    //original data series is incomplete e.g. 2.8, 2.9, 3.0, 3.5, 4.0
+    //initial data series is incomplete e.g. 2.8, 2.9, 3.0, 3.5, 4.0
     //
     var averageDensityForSolutionsFrom13PercentSodiumHypochlorite ={
       0.1:1.001,
@@ -129,11 +129,11 @@ var BleachSolution = function (options) {
       10.0:1.118
     }
 
-    this.originalDensity = function(){
+    this.initialDensity = function(){
       if (this.manufacturingConcentration == 13){
-        return averageDensityForSolutionsFrom13PercentSodiumHypochlorite[this.originalConcentration.toFixed(1)]
+        return averageDensityForSolutionsFrom13PercentSodiumHypochlorite[this.initialConcentration.toFixed(1)]
       }else if (this.manufacturingConcentration == 24) {
-        return averageDensityForSolutionsFrom24PercentSodiumHypochlorite[this.originalConcentration.toFixed(1)]
+        return averageDensityForSolutionsFrom24PercentSodiumHypochlorite[this.initialConcentration.toFixed(1)]
       }else {
          throw new Error("Data only available for manufacturing densities of 13% or 24%")
       }
@@ -144,7 +144,7 @@ var BleachSolution = function (options) {
 }
 
 BleachSolution.prototype.init = function() {
-  params = ["originalVolume" , "finalVolume", "originalConcentration", "finalConcentration"];
+  params = ["initialVolume" , "finalVolume", "initialConcentration", "finalConcentration"];
   params.map(function(param) {
     if (typeof that[param] === 'undefined' ) {
       that.calculate(param)
@@ -155,23 +155,23 @@ BleachSolution.prototype.init = function() {
 
 BleachSolution.prototype.calculate = function(toCalc) {
   switch(toCalc){
-    case "originalVolume":
-        this.originalVolume = (this.finalConcentration * this.finalVolume) / this.originalConcentration
-        this.originalVolume = this.originalVolume.toFixed(3) * 1
-        return this.originalVolume
+    case "initialVolume":
+        this.initialVolume = (this.finalConcentration * this.finalVolume) / this.initialConcentration
+        this.initialVolume = this.initialVolume.toFixed(3) * 1
+        return this.initialVolume
       break
-      case "originalConcentration":
-        this.originalConcentration = (this.finalConcentration * this.finalVolume) / this.originalVolume
-        this.originalConcentration = this.originalConcentration.toFixed(2) * 1
-        return this.originalConcentration
+      case "initialConcentration":
+        this.initialConcentration = (this.finalConcentration * this.finalVolume) / this.initialVolume
+        this.initialConcentration = this.initialConcentration.toFixed(2) * 1
+        return this.initialConcentration
       break
       case "finalVolume":
-        this.finalVolume = (this.originalConcentration * this.originalVolume) / this.finalConcentration
+        this.finalVolume = (this.initialConcentration * this.initialVolume) / this.finalConcentration
         this.finalVolume = Math.round(this.finalVolume)
         return this.finalVolume
       break
       case "finalConcentration":
-        this.finalConcentration = (this.originalConcentration * this.originalVolume) / this.finalVolume
+        this.finalConcentration = (this.initialConcentration * this.initialVolume) / this.finalVolume
         this.finalConcentration = this.finalConcentration.toFixed(2) * 1
         return this.finalConcentration
       break
@@ -188,7 +188,7 @@ BleachSolution.prototype.calculate = function(toCalc) {
 //9,6 x 1,152 x 10 = 110,59 grammes de chlore actif
 //
 BleachSolution.prototype.activeChlorine = function(){
-  activeChlorine = this.originalConcentration * this.originalDensity()  * 10
+  activeChlorine = this.initialConcentration * this.initialDensity()  * 10
   return MathJS.round(activeChlorine, 2)
 }
 

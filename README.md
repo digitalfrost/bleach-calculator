@@ -19,16 +19,15 @@ Always wear appropriate safety equipment when handling bleach
 
 Works out either:
 
-  - original volume
-  - original concentration
+  - initial volume
+  - initial concentration
   - final volume
   - or final concentration
 
 given the other three characteristics of the bleach solution.
 
-Original concentration is in ???  --> Grams of chloride per litres
-Final concentration is in g / litres
-
+Initial concentration is in ???  --> Grams of chloride per litres
+Final concentration is in g / litres ???
 ### Install
 
 Install via npm
@@ -40,7 +39,7 @@ npm install bleach-calculator
 ### Usage
 
 ```
-var solution = new BleachSolution({originalConcentration : 20, finalVolume: 10, finalConcentration: 10});
-console.log ("Original Volume: " + solution.originalVolume);
+var solution = new BleachSolution({initialConcentration : 20, finalVolume: 10, finalConcentration: 10});
+console.log ("Initial Volume: " + solution.originalVolume);
 
 ```
