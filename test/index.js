@@ -11,7 +11,7 @@ describe('manufacturing concentration', function(){
   });
 });
 
-describe('initial density', function(){
+describe('initial density calculation', function(){
   //TODO Fix Async problem witht this test
   it('should throw exception if manufacturing concentration is not 24% or 13%', function(){
       solution = new BleachSolution({initialAvailableChlorine: 5.50, manufacturingConcentration: 19})
@@ -20,11 +20,11 @@ describe('initial density', function(){
   });
   it('should return initial density for 13% initial manufacturing concentration', function(){
       solution = new BleachSolution({initialPercentageAvailableChlorine: 9.6, manufacturingConcentration: 13})
-      solution.initialDensity().should.equal(1.152)
+      solution.calculate("initialDensity").should.equal(1.152)
   });
     it('should return initial density for 24% initial manufacturing concentration', function(){
       solution = new BleachSolution({initialPercentageAvailableChlorine: 9.6, manufacturingConcentration: 24})
-      solution.initialDensity().should.equal(1.112)
+      solution.calculate("initialDensity").should.equal(1.112)
   });
 });
 

@@ -43,6 +43,13 @@ var solution = new BleachSolution({initialPercentageSodiumHypochlorite: 10.08})
 solution.calculate("percentageAvailableChlorine")
 ```
 
+Calculate Initial Density of Solution
+
+```
+var solution = new BleachSolution({initialPercentageAvailableChlorine : 9.6});
+solution.calculate("initialDensity")
+```
+
 
 ## DISCLAIMER
 

@@ -165,6 +165,9 @@ BleachSolution.prototype.calculate = function(toCalc) {
         this.initialAvailableChlorine = this.initialAvailableChlorine.toFixed(2) * 1
         return this.initialConcentration
       break
+      case "initialDensity":
+        return this.initialDensity()
+      break
       case "finalVolume":
         this.finalVolume = (this.initialAvailableChlorine * this.initialVolume) / this.finalAvailableChlorine
         this.finalVolume = Math.round(this.finalVolume)
