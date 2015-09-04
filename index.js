@@ -177,6 +177,9 @@ BleachSolution.prototype.calculate = function(toCalc) {
         this.finalAvailableChlorine = this.finalAvailableChlorine.toFixed(2) * 1
         return this.finalAvailableChlorine
       break
+      case "sodiumHypochlorite":
+        return this.sodiumHypochlorite()
+      break
       default:
         return "Unknown parameter to calculate"
       break
@@ -193,6 +196,16 @@ BleachSolution.prototype.activeChlorine = function(){
   this.activeChlorine = this.initialPercentageAvailableChlorine * this.initialDensity()  * 10
   this.activeChlorine = this.activeChlorine.toFixed(2) * 1
   return this.activeChlorine
+}
+
+//Calculates  % NaClO ( Percentage Sodium Hypochlorite)
+//Poids moléculaire chlore actif (exprimé en Cl2) = 71
+//Poids moléculaire NaClO = 74,5
+//
+BleachSolution.prototype.sodiumHypochlorite = function() {
+  this.initialPercentageAvailableSodiumHypochlorite = (this.initialPercentageAvailableChlorine * 74.5) / 71
+  this.initialPercentageAvailableSodiumHypochlorite = this.initialPercentageAvailableSodiumHypochlorite.toFixed(2) * 1
+  return this.initialPercentageAvailableSodiumHypochlorite
 }
 
 module.exports = BleachSolution;

@@ -73,5 +73,10 @@ describe('Calculate Bleach Solution', function() {
     s.finalAvailableChlorine.should.equal(0.05);
   });
 
+  it('should calculate initial percentage Sodium Hypochlorite', function() {
+    s = new BleachSolution({initialPercentageAvailableChlorine: 9.6})
+    s.calculate("sodiumHypochlorite").should.equal(10.07)
+  });
+
 
 });

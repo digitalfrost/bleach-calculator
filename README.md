@@ -15,7 +15,7 @@ Mixing bleach with some household cleaners can be hazardous.  Mixtures of other 
 
 Always wear appropriate safety equipment when handling bleach
 
-### Description​​
+### Description / Usage
 
 Works out either:
 
@@ -26,6 +26,21 @@ Works out either:
 
 given the other three characteristics of the bleach solution.
 
+
+```
+var solution = new BleachSolution({initialAvailableChlorine : 20, finalVolume: 10, finalAvailableChlorine: 10});
+console.log ("Initial Volume: " + solution.originalVolume);
+
+```
+
+Calculate initial concentration of Sodium Hypochlorite (percentage Sodium Hypochlorite)
+
+```
+var solution = new BleachSolution({initialPercentageAvailableChlorine : 9.6});
+solution.calculate("sodiumHypoclorite")
+```
+
+
 ### Install
 
 Install via npm
@@ -34,10 +49,6 @@ Install via npm
 npm install bleach-calculator
 ```
 
-### Usage
 
-```
-var solution = new BleachSolution({initialAvailableChlorine : 20, finalVolume: 10, finalAvailableChlorine: 10});
-console.log ("Initial Volume: " + solution.originalVolume);
 
-```
+calculate initial percentage Sodium Hypochlorite
