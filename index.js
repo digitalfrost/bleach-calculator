@@ -1,5 +1,3 @@
-var MathJS = require('mathjs');
-
 //expects a hash with 3 of the 4 following keys initialVolume, initialConcentration, finalVolume, finalConcentration
 //an optional option specifyinf the sodiun hypochlorite concentration used to make the initial bleach can be passed in.
 var BleachSolution = function (options) {
@@ -220,5 +218,7 @@ BleachSolution.prototype.percentageAvailableChlorineFromSodiumHypochlorite = fun
   this.initialPercentageAvailableChlorine  = this.initialPercentageAvailableChlorine.toFixed(1) * 1
   return this.initialPercentageAvailableChlorine
 }
+
+//TODO simplify maybe using a dilute() and undilute() function
 
 module.exports = BleachSolution;
