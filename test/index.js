@@ -83,4 +83,8 @@ describe('Calculate Bleach Solution', function() {
     s.calculate("percentageAvailableChlorine").should.equal(9.6)
   });
 
+  it('should calculate chlorometric degree', function() {
+    s = new BleachSolution({initialAvailableChlorine: 110.55})
+    s.calculate("chlorometricDegree").should.equal(34.88)
+  });
 });

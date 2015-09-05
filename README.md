@@ -16,9 +16,9 @@ npm install bleach-calculator
 Works out either:
 
   - initial volume
-  - initial concentration (this is the available chlorine normally in mg / l )
+  - initial concentration (this is the available chlorine normally in mg / l ) ? / or g / l ?
   - final volume
-  - or final concentration expressed as final available chlorine in mg / l
+  - or final concentration expressed as final available chlorine in mg / l/ or g / l ?
 
 given the other three characteristics of the bleach solution.
 
@@ -48,6 +48,13 @@ Calculate Initial Density of Solution
 ```
 var solution = new BleachSolution({initialPercentageAvailableChlorine : 9.6});
 solution.calculate("initialDensity")
+```
+
+### Calcualte chlorometric degree
+need to specify available chlorine
+
+```
+solution.calculate("chlorometriDegree")
 ```
 
 

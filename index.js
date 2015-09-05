@@ -8,6 +8,7 @@ var BleachSolution = function (options) {
     this.finalVolume = options.finalVolume;
     this.finalAvailableChlorine = options.finalAvailableChlorine //normally in mg/l
     this.manufacturingConcentration = options.manufacturingConcentration || 24 ; // default to 24% as per recommendation of C.S.F.E.J.
+
     //la densité moyenne pour un produit obtenu à partir d’un hypochlorite de sodium à 13 %
     //Average density of the initial solution for a product initialy made from Sodium Hypochlorite at 13 %
     //This is an average density because in practice it can varry in function of the quality of the Sodium Hypochlorite
@@ -188,6 +189,9 @@ BleachSolution.prototype.calculate = function(toCalc) {
       case "sodiumHypochlorite":  //Calculates initial % NaClO ( Percentage Sodium Hypochlorite)
         return this.sodiumHypochlorite()
       break
+      case "chlorometricDegree":
+        return this.chlorometricDegree()
+      break
       default:
         return "Unknown parameter to calculate"
       break
@@ -195,6 +199,7 @@ BleachSolution.prototype.calculate = function(toCalc) {
 }
 
 
+//the concentration in grams of available chloride in 1 litre of solution
 //la concentration en grammes de chlore actif présent dans 1 litre de solution. Elle
 //s’obtient en multipliant le pourcentage de chlore actif par la densité et par 10 [pour passer des % (poids/poids) aux grammes par litre].
 //Exemple : 1 litre de Concentré de Javel à 9,6 % de chlore actif contient :
@@ -220,6 +225,15 @@ BleachSolution.prototype.percentageAvailableChlorineFromSodiumHypochlorite = fun
   this.initialPercentageAvailableChlorine = ( this.initialPercentageSodiumHypochlorite * 71 ) / 74.5
   this.initialPercentageAvailableChlorine  = this.initialPercentageAvailableChlorine.toFixed(1) * 1
   return this.initialPercentageAvailableChlorine
+}
+
+//Le degré chlorométrique  correspond à la quantité minimale de chlore gazeux utilisée lors de la préparation de l’Eau de Javel,
+//exprimée en litres de chlore gazeux pour un litre d’Eau de Javel.
+//[Un litre d’Eau de Javel à 1°chl a nécessité au moins 1 litre de chlore gazeux (Cl2) pour le fabriquer].
+//1 gramme de chlore actif correspond à 22.4/71 = 0,315 litre
+BleachSolution.prototype.chlorometricDegree = function () {
+  degree = this.initialAvailableChlorine * (22.4 / 71 )
+  return degree.toFixed(2) *1
 }
 
 //TODO simplify maybe using a dilute() and undilute() function
