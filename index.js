@@ -204,8 +204,20 @@ BleachSolution.prototype.calculate = function(toCalc) {
 //s’obtient en multipliant le pourcentage de chlore actif par la densité et par 10 [pour passer des % (poids/poids) aux grammes par litre].
 //Exemple : 1 litre de Concentré de Javel à 9,6 % de chlore actif contient :
 //9,6 x 1,152 x 10 = 110,59 grammes de chlore actif
-//
 BleachSolution.prototype.activeChlorine = function(){
+  if (typeof(this.initialPercentageAvailableChlorine) !== "undefined") {
+    this.activeChlorineFromPercentageAvailableChlorine();
+    return this.activeChlorine
+  } else if (typeof(this.initialPercentageSodiumHypochlorite) !== "undefined") {
+    this.percentageAvailableChlorineFromSodiumHypochlorite();
+    this.activeChlorineFromPercentageAvailableChlorine();
+    return this.activeChlorine
+  } else {
+    console.log("cannot calculate active chlorine with available solution data")
+  }
+}
+
+BleachSolution.prototype.activeChlorineFromPercentageAvailableChlorine = function(){
   this.activeChlorine = this.initialPercentageAvailableChlorine * this.initialDensity()  * 10
   this.activeChlorine = this.activeChlorine.toFixed(2) * 1
   return this.activeChlorine

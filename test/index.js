@@ -45,6 +45,14 @@ describe('active chlorine calculation', function(){
       solution = new BleachSolution({initialPercentageAvailableChlorine: 9.10})
       solution.activeChlorine().should.equal(100.65)
   });
+  it('should calculate active chlorine from initial percentage sodium hypochloride', function(){
+      solution = new BleachSolution({initialPercentageSodiumHypochlorite: 10.08, manufacturingConcentration: 13})
+      solution.activeChlorine().should.equal(110.59)
+  });
+  it('should calculate active chlorine for an initial solution at 9.6% made from Sodium Hydrochloride with 24% acive chlorine', function(){
+      solution = new BleachSolution({initialPercentageSodiumHypochlorite: 2.73})
+      solution.activeChlorine().should.equal(26.73)
+  });
 });
 
 describe('Calculate Bleach Solution', function() {
